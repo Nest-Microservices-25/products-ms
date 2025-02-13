@@ -1,11 +1,19 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { PrismaClient } from '@prisma/client';
 
 @Injectable()
-export class ProductsService {
+export class ProductsService extends PrismaClient implements OnModuleInit {
+  private readonly logger = new Logger('ProductsService');
+  onModuleInit() {
+    this.$connect();
+    this.logger.log('🧡 Connected to the database');
+  }
   create(createProductDto: CreateProductDto) {
-    return createProductDto;
+    return this.product.create({
+      data: createProductDto,
+    });
   }
 
   findAll() {
@@ -17,7 +25,7 @@ export class ProductsService {
   }
 
   update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+    return `This action updates a #${id} xproduct`;
   }
 
   remove(id: number) {
