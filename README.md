@@ -101,4 +101,4 @@ Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
 
 ## PRISMA
 
-npx prisma migrate dev --name init
+npx prisma migrate dev --name available
